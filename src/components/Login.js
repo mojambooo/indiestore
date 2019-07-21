@@ -7,14 +7,20 @@ class Login extends React.Component{
     this.state = {
 
     }
+    this.users = [
+      {name: "John", login: "mojambo", pass: "kek"},
+      {name: "George", login: "vataku", pass: "lol"},
+      {name: "Hannah", login: "seitokai", pass: "arbidol"},
+    ]
   }
 
   componentDidMount(){
+    
   }
 
   main(){
     return (
-      <div className="login modal">
+      <div className="login">
         LOGIN
       </div>
     )

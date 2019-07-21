@@ -10,17 +10,41 @@ import Home from './pages/Home/Home'
 import Kek from './pages/Kek/Kek'
 import NoMatch from './components/NoMatch'
 
-import './App.css';
+import './styles/App.css';
+import './styles/animations.css';
 
 class App extends Component {
   componentWillMount(){
-    this.props.getDeviceInfo()
+    this.props.getDeviceInfo(this.isMobile())
+  }
+
+  isMobile = () => {
+    let devices = {
+      Android: function() { 
+        return navigator.userAgent.match(/Android/i); 
+      }, 
+      iOS: function() { 
+        return navigator.userAgent.match(/iPhone/i); 
+      },
+      IPAD: function() { 
+        return navigator.userAgent.match(/iPad/i); 
+      },
+      any: function() { 
+        return (devices.Android() || devices.BlackBerry() || devices.iOS() || devices.Opera() || devices.Windows()); 
+      }
+    };
+    if(devices.iOS() || devices.Android())  {
+      return true
+    } else return false
   }
 
   render(){
     let modal
-    if(this.props.store.modal){
-      modal = {display: "none"}
+    console.log(this.props.store)
+    if(this.props.store.mobile){
+      if(this.props.modal.open){
+        modal = {display: "none"}
+      }
     }
 
     return (
@@ -43,13 +67,14 @@ class App extends Component {
 
 const mapStateToProps = e => {
   return {
-		store: e.store
+    modal: e.modal,
+    store: e.store
   }
 }
 
 const mapDispatchToProps = dispatch =>{
   return {
-    getDeviceInfo: () => dispatch(getDeviceInfo())
+    getDeviceInfo: (e) => dispatch(getDeviceInfo(e))
   }
 }
 

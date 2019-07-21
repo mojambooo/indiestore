@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { openLogin } from '../../redux/actions/store'
+import { openLogin } from '../../redux/actions/modal'
 
 class LoginOrAvatar extends React.Component{
 
